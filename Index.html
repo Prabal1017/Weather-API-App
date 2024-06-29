@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="search">
+      <input class="searchBar" type="text" placeholder="Search city" spellcheck="false">
+
+      <button class="searchButton"><i class="fa-solid fa-magnifying-glass"
+          style="color: #ffffff; margin-top: 4px"></i></button>
+    </div>
+
+    <div class="weather">
+
+      <h2 class="city">New york</h2>
+      <h1 class="temp">22°C</h1>
+
+      <div>
+        <p class="info">Party Cloudy</p>
+        <div class="highLow">
+          <p class="high">H:25°C</p>
+
+          <p class="low">L:20°C</p>
+        </div>
+      </div>
+
+      <img class="weather-icon" src="images/clear.png">
+
+      <div class="details">
+
+        <div class="col">
+          <i class="bi bi-thermometer-half" style="font-size: 40px; margin-right:10px;"></i>
+          <div>
+            <p class="feelsLike">10°C</p>
+            <p class="feelsLike">Feels like</p>
+          </div>
+        </div>
+
+        <div class="col">
+          <i class="bi bi-eye" style="font-size:40px; margin-right:10px;"></i>
+          <div>
+            <p class="visibility">500</p>
+            <p class="visibility">Visibility</p>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="detailsTwo">
+
+        <div class="col">
+          <img src="images/humidity.png">
+          <div>
+            <p class="humidity">50%</p>
+            <p class="humidity">Humidity</p>
+          </div>
+        </div>
+
+        <div class="col">
+          <img src="images/wind.png">
+          <div>
+            <p class="wind">50 kmph</p>
+            <p class="wind">Wind</p>
+          </div>
+        </div>
+      </div>
+
+
+      <script>
+
+        const apiKey = "3e7323bc4d936dd725df85d6ffeb4c6a"
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+
+        const searchBox = document.querySelector(".search input")
+        const searchBtn = document.querySelector(".search button")
+        const weatherIcon = document.querySelector(".weather-icon")
+
+        async function checkWeather(city) {
+          const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
+
+          var data = await response.json()
+
+          const tempInt = Math.round(data.main.temp);
+          const feelsLikeInt = Math.round(data.main.feels_like);
+          const lowInt = Math.round(data.main.temp_min);
+          const highInt = Math.round(data.main.temp_max);
+          const windInt = Math.round(data.wind.speed);
+
+          console.log(data)
+
+          document.querySelector(".temp").innerHTML = tempInt + "°C"
+          document.querySelector(".city").innerHTML = data.name
+          document.querySelector(".humidity").innerHTML = data.main.humidity + "%"
+          document.querySelector(".wind").innerHTML = windInt + " kph"
+          document.querySelector(".visibility").innerHTML = data.visibility
+          document.querySelector(".feelsLike").innerHTML = feelsLikeInt + "°C"
+          document.querySelector(".low").innerHTML = "L:" + lowInt + "°C"
+          document.querySelector(".high").innerHTML = "H:" + highInt + "°C"
+          document.querySelector(".info").innerHTML = data.weather[0].main
+
+          if (weatherIcon != null) {
+            if (data.weather[0].main == "Clouds") {
+              weatherIcon.src = "images/clouds.png";
+            }
+            else if (data.weather[0].main == "Clear") {
+              weatherIcon.src = "images/clear.png";
+            }
+            else if (data.weather[0].main == "Rain") {
+              weatherIcon.src = "images/rain.png";
+            }
+            else if (data.weather[0].main == "Drizzle") {
+              weatherIcon.src = "images/drizzle.png";
+            }
+            else if (data.weather[0].main == "Mist") {
+              weatherIcon.src = "images/mist.png"
+            }
+          }
+
+          document.querySelector(".weather").style.display = "block";
+        }
+
+
+        searchBtn.addEventListener("click", () => {
+          checkWeather(searchBox.value)
+        })
+      </script>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
