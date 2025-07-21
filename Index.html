@@ -22,6 +22,10 @@
 
 <body>
 
+
+  <!-- <img class="weather-picture-one" src="images/clear.png">
+  <img class="weather-picture-two" src="images/clear.png"> -->
+
   <div class="card">
     <div class="search">
       <input class="searchBar" type="text" placeholder="Search city" spellcheck="false">
@@ -97,9 +101,14 @@
         const weatherIcon = document.querySelector(".weather-icon")
 
         async function checkWeather(city) {
-          const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
-
-          var data = await response.json()
+          try {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
+            var data = await response.json()
+          } catch (error) {
+            console.log(error);
+          }
+          
+          console.log(data)
 
           const tempInt = Math.round(data.main.temp);
           const feelsLikeInt = Math.round(data.main.feels_like);
@@ -141,9 +150,11 @@
         }
 
 
+
         searchBtn.addEventListener("click", () => {
           checkWeather(searchBox.value)
         })
+        
       </script>
 
     </div>

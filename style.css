@@ -1,31 +1,59 @@
 * {
   margin: 0;
   padding: 0;
-  font-family:'Roboto';
+  font-family: "Roboto";
   box-sizing: border-box;
 }
 
 body {
   background: #222;
+  /* background: linear-gradient(90deg, #009dff, #6ed6ff); */
 }
 
-.card{
+.card {
   width: 90%;
   max-width: 470px;
-  background: linear-gradient(90deg, #009dff,#6ed6ff);
+  background: linear-gradient(90deg, #009dff, #6ed6ff);
   color: #fff;
   margin: 30px auto 0;
   border-radius: 20px;
   padding: 40px 35px;
   text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
 }
 
-.search{
+/* .card::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(#009dff, #6ed6ff, #009dff);
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 6px;
+  border-radius: 20px;
+} */
+
+/* .weather-picture-one {
+  position: absolute;
+  top: 50%;
+  left: 59%;
+}
+
+.weather-picture-two {
+  position: absolute;
+  top: 30%;
+  left: 26%;
+} */
+
+.search {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
 }
 
 .search input {
@@ -41,12 +69,12 @@ body {
   font-size: 18px;
 }
 
-::placeholder{
+::placeholder {
   color: rgb(255, 255, 255);
   font-weight: 150;
 }
 
-.search button{
+.search button {
   border: 0;
   outline: 0;
   background: transparent;
@@ -57,35 +85,31 @@ body {
   cursor: pointer;
 }
 
-.searchButton{
+.searchButton {
   font-size: 18px;
 }
 
-
-
-.weather-icon{
+.weather-icon {
   width: 170px;
-  
 }
 
-.weather h1{
+.weather h1 {
   font-size: 80px;
   font-weight: 50;
-  
 }
 
-.weather h2{
+.weather h2 {
   font-size: 40px;
   font-weight: 250;
   margin-top: 50px;
 }
 
-.info{
+.info {
   font-size: 20px;
   font-weight: 100;
 }
 
-.highLow{
+.highLow {
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -93,33 +117,33 @@ body {
   font-weight: 100;
 }
 
-.highLow{
+.highLow {
   margin: 0 10px;
   display: flex;
   justify-content: center;
   font-size: 20px;
-  font-weight: 100;/* Adding horizontal space between H and L */
+  font-weight: 100; /* Adding horizontal space between H and L */
 }
 
-.high{
+.high {
   margin: 0 10px;
 }
 
-.high, .low, .info{
+.high,
+.low,
+.info {
   text-shadow: 2px 2px 4px #868686;
 }
 
-.info{
+.info {
   margin-bottom: 10px;
 }
-.temp, .city{
-
+.temp,
+.city {
   text-shadow: 1px 1px 4px #868686;
 }
 
-
-
-.details{
+.details {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -127,7 +151,7 @@ body {
   margin-top: 10px;
 }
 
-.detailsTwo{
+.detailsTwo {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,35 +159,37 @@ body {
   margin-top: 50px;
 }
 
-.col{
+.col {
   display: flex;
   align-items: center;
   text-align: left;
 }
 
-.col img{
+.col img {
   width: 40px;
   margin-right: 10px;
 }
 
-.col2{
+.col2 {
   display: flex;
   align-items: center;
   text-align: left;
   margin-top: 30px;
 }
 
-.col2 img{
+.col2 img {
   width: 40px;
   margin-right: 10px;
 }
-.humidity, .wind, .visibility, .feelsLike{
+.humidity,
+.wind,
+.visibility,
+.feelsLike {
   font-size: 28px;
   font-weight: 50;
   /* text-shadow: 1px 1px 4px #868686; */
-  
 }
 
-.weather{
+.weather {
   display: none;
 }
