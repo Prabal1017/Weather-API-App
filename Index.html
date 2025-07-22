@@ -28,7 +28,7 @@
 
   <div class="card">
     <div class="search">
-      <input class="searchBar" type="text" placeholder="Search city" spellcheck="false">
+      <input class="searchBar" id="cityInput" type="text" placeholder="Search city" spellcheck="false">
 
       <button class="searchButton"><i class="fa-solid fa-magnifying-glass"
           style="color: #ffffff; margin-top: 4px"></i></button>
@@ -69,8 +69,6 @@
         </div>
       </div>
 
-
-
       <div class="detailsTwo">
 
         <div class="col">
@@ -92,6 +90,15 @@
 
 
       <script>
+
+        const btnText = document.querySelector('.searchBar')
+
+        btnText.addEventListener('keydown', event => {
+          if(event.key === "Enter"){
+            console.log("hello")
+            checkWeather(searchBox.value)
+          }
+        })
 
         const apiKey = "3e7323bc4d936dd725df85d6ffeb4c6a"
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
@@ -148,8 +155,6 @@
 
           document.querySelector(".weather").style.display = "block";
         }
-
-
 
         searchBtn.addEventListener("click", () => {
           checkWeather(searchBox.value)
