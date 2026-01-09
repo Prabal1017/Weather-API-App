@@ -16,14 +16,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+    integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
+
+  <!-- <img class="weather-picture-one" src="images/clear.png">
+  <img class="weather-picture-two" src="images/clear.png"> -->
+
   <div class="card">
     <div class="search">
-      <input class="searchBar" type="text" placeholder="Search city" spellcheck="false">
+      <input class="searchBar" id="cityInput" type="text" placeholder="Search city" spellcheck="false">
 
       <button class="searchButton"><i class="fa-solid fa-magnifying-glass"
           style="color: #ffffff; margin-top: 4px"></i></button>
@@ -64,8 +69,6 @@
         </div>
       </div>
 
-
-
       <div class="detailsTwo">
 
         <div class="col">
@@ -88,6 +91,15 @@
 
       <script>
 
+        const btnText = document.querySelector('.searchBar')
+
+        btnText.addEventListener('keydown', event => {
+          if(event.key === "Enter"){
+            console.log("hello")
+            checkWeather(searchBox.value)
+          }
+        })
+
         const apiKey = "3e7323bc4d936dd725df85d6ffeb4c6a"
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 
@@ -96,9 +108,14 @@
         const weatherIcon = document.querySelector(".weather-icon")
 
         async function checkWeather(city) {
-          const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
-
-          var data = await response.json()
+          try {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
+            var data = await response.json()
+          } catch (error) {
+            console.log(error);
+          }
+          
+          console.log(data)
 
           const tempInt = Math.round(data.main.temp);
           const feelsLikeInt = Math.round(data.main.feels_like);
@@ -139,10 +156,10 @@
           document.querySelector(".weather").style.display = "block";
         }
 
-
         searchBtn.addEventListener("click", () => {
           checkWeather(searchBox.value)
         })
+        
       </script>
 
     </div>
